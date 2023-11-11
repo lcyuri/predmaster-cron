@@ -12,7 +12,7 @@ dotenv.config();
 cron.schedule('*/1 * * * *', async () => {
   try {
     await alarmCronJob();
-    await historyCronJob();
+    //await historyCronJob();
     await previsionCronJob();
     await settingsCronJob();
   } catch (error) {
@@ -43,21 +43,21 @@ const alarmCronJob = async () => {
   }
 }
 
-const historyCronJob = async () => {
-  try {
-    console.log('Running history cron job');
+// const historyCronJob = async () => {
+//   try {
+//     console.log('Running history cron job');
 
-    const lastLine = await getLastLine('history');
-    const newLines = await getNewLines(process.env.HISTORY_PATH, lastLine);
-    const url = process.env.HOST_NAME + process.env.HISTORY_ENDPOINT + `?clientId=${process.env.CLIENT_ID}`;
-    await postNewLines(url, newLines);
-    await updateLastLine('history', newLines[0]);
+//     const lastLine = await getLastLine('history');
+//     const newLines = await getNewLines(process.env.HISTORY_PATH, lastLine);
+//     const url = process.env.HOST_NAME + process.env.HISTORY_ENDPOINT + `?clientId=${process.env.CLIENT_ID}`;
+//     await postNewLines(url, newLines);
+//     await updateLastLine('history', newLines[0]);
 
-    console.log('History cron job is complete');
-  } catch(error) {
-    console.log('Error running history cron job - ', error);
-  }
-}
+//     console.log('History cron job is complete');
+//   } catch(error) {
+//     console.log('Error running history cron job - ', error);
+//   }
+// }
 
 const previsionCronJob = async () => {
   try {
